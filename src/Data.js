@@ -14,7 +14,15 @@ export const userData = [
               { title: "Rental/Leasing of Movable Property" },
             ],
           },
-          { title: "Consulting Services" },
+          {
+            title: "Consulting Services",
+            rootThreeSubMenu: [
+              { title: "Yes, Consulting submenu 1" },
+              { title: "Yes, work done in Singapore LESS than 183 days" },
+              { title: "Work not done in Singapore" },
+              { title: "Rental/Leasing of Movable Property" },
+            ],
+          },
           { title: "Management Services" },
           { title: "Certification Services" },
         ],
