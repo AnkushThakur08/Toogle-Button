@@ -5,40 +5,48 @@ import "./App.css";
 import { MdModeEditOutline } from "react-icons/md";
 import { FaTimes } from "react-icons/fa";
 
-// API
 import { userData } from "./Data";
 
 const App = () => {
-  const [allDetails, setAllDetails] = useState(userData);
+  console.log("ALL DATA", userData);
 
-  const [loopingData, setLoopingData] = useState({
-    error: "",
-    success: "",
-    datas: [],
-  });
+  const [allDetails, setAllDetails] = useState(userData);
 
   const [isShown, setIsShown] = useState(false);
   const [isShown2, setIsShown2] = useState(false);
 
+  const [displayLevelOneData, setDisplayLevelTwoData] = useState([]);
+
   const handleClick = (event) => {
     setIsShown(!isShown);
-  };
-
-  const handleClick2 = (event) => {
     setIsShown2(!isShown2);
   };
 
+  const toggle = () => {
+    setAllDetails(userData);
+
+    console.log("STATE", allDetails);
+
+    userData.map((IndividualData, index) => {
+      console.log(IndividualData);
+      console.log(IndividualData.rootOneSubMenu?.[0]);
+    });
+  };
+
   const rootLevelOne = () => {
-    handleClick(true);
+    handleClick();
     console.log("CLICK VALUE", isShown);
     console.log(allDetails);
     allDetails.map((IndividualDetail, index) => {
-      console.log(IndividualDetail);
+      console.log(IndividualDetail.rootOneSubMenu);
+      setDisplayLevelTwoData(IndividualDetail.rootOneSubMenu);
+
+      console.log("FINAL", displayLevelOneData);
     });
   };
 
   const rootLevelTwo = () => {
-    handleClick2();
+    handleClick();
     console.log("CLICK VALUE", isShown);
   };
 
@@ -47,7 +55,10 @@ const App = () => {
       <h1 className="text-center">Component Toggle</h1>
 
       <div className="ms-5">
-        <button className="rounded-circle border border-info text-info m-4 fw-bold ">
+        <button
+          className="rounded-circle border border-info text-info m-4 fw-bold "
+          onClick={toggle}
+        >
           +
         </button>
         <span className="fs-3 fw-bold me-5">Company</span>
@@ -77,15 +88,11 @@ const App = () => {
                 +
               </button>
 
-              {allDetails.map((IndividualDetail, index) => {
-                console.log(IndividualDetail.rootOneSubMenu?.title);
-              })}
-
               <span className="fs-5  me-5">Services</span>
 
               <button
                 className="border border-light rounded fs-5 me-5 p-2"
-                style={{ marginLeft: "200px" }}
+                style={{ marginLeft: "100px" }}
                 onClick={() => rootLevelTwo()}
               >
                 + Add Rule
@@ -95,92 +102,16 @@ const App = () => {
               <FaTimes size={25} className="ms-3" />
             </div>
 
-            {isShown2 && (
-              <div style={{ marginLeft: "50px" }}>
-                <div>
-                  <button className="rounded-circle  border border-info text-info m-4 fw-bold">
-                    +
-                  </button>
-
-                  <span className="fs-5  me-5">Technical Services</span>
-
-                  <button
-                    className="border border-light rounded fs-5 me-5 p-2"
-                    style={{ marginLeft: "140px" }}
-                  >
-                    + Add Rule
-                  </button>
-
-                  <MdModeEditOutline size={25} />
-                  <FaTimes size={25} className="ms-3" />
-                </div>
-
-                <div>
-                  <button className="rounded-circle  border border-info text-info m-4 fw-bold">
-                    +
-                  </button>
-
-                  <span className="fs-5  me-5">Consultent Services</span>
-
-                  <button
-                    className="border border-light rounded fs-5 me-5 p-2"
-                    style={{ marginLeft: "140px" }}
-                  >
-                    + Add Rule
-                  </button>
-
-                  <MdModeEditOutline size={25} />
-                  <FaTimes size={25} className="ms-3" />
-                </div>
-
-                <div>
-                  <button className="rounded-circle  border border-info text-info m-4 fw-bold">
-                    +
-                  </button>
-
-                  <span className="fs-5  me-5">Management Services</span>
-
-                  <button
-                    className="border border-light rounded fs-5 me-5 p-2"
-                    style={{ marginLeft: "140px" }}
-                  >
-                    + Add Rule
-                  </button>
-
-                  <MdModeEditOutline size={25} />
-                  <FaTimes size={25} className="ms-3" />
-                </div>
-
-                <div>
-                  <button className="rounded-circle  border border-info text-info m-4 fw-bold">
-                    +
-                  </button>
-
-                  <span className="fs-5  me-5">Certification Services</span>
-
-                  <button
-                    className="border border-light rounded fs-5 me-5 p-2"
-                    style={{ marginLeft: "140px" }}
-                  >
-                    + Add Rule
-                  </button>
-
-                  <MdModeEditOutline size={25} />
-                  <FaTimes size={25} className="ms-3" />
-                </div>
-              </div>
-            )}
-
             <div>
               <button className="rounded-circle  border border-info text-info m-4 fw-bold">
                 +
               </button>
 
-              <span className="fs-5  me-5">Transportation</span>
+              <span className="fs-5  me-5">Services</span>
 
               <button
                 className="border border-light rounded fs-5 me-5 p-2"
-                style={{ marginLeft: "140px" }}
+                style={{ marginLeft: "100px" }}
               >
                 + Add Rule
               </button>
@@ -194,11 +125,11 @@ const App = () => {
                 +
               </button>
 
-              <span className="fs-5  me-5">Software/Info/Digited Goods</span>
+              <span className="fs-5  me-5">Services</span>
 
               <button
                 className="border border-light rounded fs-5 me-5 p-2"
-                style={{ marginLeft: "10px" }}
+                style={{ marginLeft: "100px" }}
               >
                 + Add Rule
               </button>
@@ -211,13 +142,11 @@ const App = () => {
                 +
               </button>
 
-              <span className="fs-5  me-5">
-                Rental/Leasing of Movable Property
-              </span>
+              <span className="fs-5  me-5">Services</span>
 
               <button
                 className="border border-light rounded fs-5 me-5 p-2"
-                style={{ marginLeft: "-40px" }}
+                style={{ marginLeft: "100px" }}
               >
                 + Add Rule
               </button>
@@ -233,10 +162,7 @@ const App = () => {
           +
         </button>
         <span className="fs-3 fw-bold me-5">Individual</span>
-        <button
-          className="border border-light rounded fs-5 me-5 p-2"
-          // onClick={() => rootLevelOne()}
-        >
+        <button className="border border-light rounded fs-5 me-5 p-2">
           + Add Rule
         </button>
         <button className="border border-light rounded fs-5 me-5 p-2">
